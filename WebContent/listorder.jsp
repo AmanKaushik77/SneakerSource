@@ -37,7 +37,7 @@ String sql = "SELECT O.orderId, C.customerId, C.firstname, C.lastname, O.totalAm
 ResultSet rst = stmt.executeQuery(sql);
 String sql2 = "SELECT productId, quantity, price FROM orderProduct WHERE orderId = ?";
 PreparedStatement prep = conn.prepareStatement(sql2);
-out.println("<table border='1' style='background-color:beige;'><tr style='color: maroon;'><th>Order Id</th><th>Order Date</th><th>Customer Id</th><th>Customer Name</th><th>Total Amount</th>");
+out.println("<table border='1' style='background-color:beige;'><tr style='color: maroon;'><th>Order Id</th><th>Customer Id</th><th>Customer Name</th><th>Total Amount</th>");
 
 while(rst.next()){
 	out.println("<tr style='color: maroon;'><td>"+rst.getInt(1)+"</td><td>"+rst.getInt(2)+"</td><td>"+rst.getString(3)+" "+rst.getString(4)+"</td><td>"+ "$" + rst.getDouble(5)+"</td></tr>");

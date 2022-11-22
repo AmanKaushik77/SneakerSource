@@ -39,7 +39,7 @@ try(Connection conn = DriverManager.getConnection(url,user,pw);
 Statement stmt = conn.createStatement();){
 	String sql = "SELECT productId, productName, productPrice FROM product";
 	String sql2 = "SELECT productId, productName, productPrice FROM product WHERE productName LIKE ?";
-	if(name.equals("") || name == null){
+	if(name == null || name.equals("") ){
 		out.println("<h1 style = 'background-color: beige; color: maroon'> All Products </h1>");
 		ResultSet rs = stmt.executeQuery(sql);
 		out.println("<table border='1' style='background-color:beige;'><tr style='color:maroon;'><th></th><th>Product Name</th><th>Price</th>");

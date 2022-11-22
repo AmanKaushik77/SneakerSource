@@ -29,26 +29,28 @@ String pw = "304#sa#pw";
 try(Connection conn = DriverManager.getConnection(url,user,pw);
 	Statement stmt = conn.createStatement();){
 	boolean used = false;
-	String sql = "SELECT customerId FROM customer";
+	boolean isEmpty = false;
+	String sql = "SELECT customerId, firstName, lastName FROM customer";
 	String sql2 = "SELECT address, city, state, postalcode, country FROM customer WHERE customerId = ?";
-
+	String nam = "";
 	ResultSet rs = stmt.executeQuery(sql);
 		while(rs.next()){
 			if(custId.equals(rs.getInt(1))){
+				nam = rs.getString(2) + " " + rs.getString(3);
 				if(productList != null){
-					used = true;
-					out.println("<h1>Shopping cart is empty</h1>");
-					conn.close();
+					isEmpty = true;
+					break;
 				}
-			}else if(custId.equals(rs.getInt(1))){
-				out.println("<h1>Invalid ID, please try again</h1>");
-				conn.close();
 			}
 		}
-		
+		if(used == true){
+			out.println("<h1>Shopping cart is empty</h1>");
+		}else if(isEmpty == true){
+			out.println("<h1>Invalid ID, please try again</h1>");
+		}else{
 			out.println("<h1>Your Order Summary</h1>");
-			//Statement stmt2 = conn.createStatement();
-			PreparedStatement pstmt = conn.prepareStatement(sql2, stmt.RETURN_GENERATED_KEYS);			
+			PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);			
+			ResultSet r2 = pstmt.executeQuery();
 			ResultSet keys = pstmt.getGeneratedKeys();
 			keys.next();
 			int orderId = keys.getInt(1);
@@ -58,7 +60,12 @@ try(Connection conn = DriverManager.getConnection(url,user,pw);
 			while (rs2.next()){
 				out.println("<tr style='color: maroon;'><td>"+rs2.getInt(1)+"</td><td>"+rs2.getInt(2)+"</td><td>"+"$" + rs2.getDouble(3)+"</td></tr>");
 			}
+			out.println("</table>");
 			
+		out.println("<h1>Order completed and will be shipped to you soon!</h1>");
+		out.println("<h1>Your Order number is: "+ orderId + "</h1>");
+		out.println("<h1>Shipping to:"+nam+" </h1>");
+		}	
 		conn.close();
 }catch(Exception e){
 	out.println(e);
