@@ -47,11 +47,17 @@ try(Connection conn = DriverManager.getConnection(url,user,pw);
 		}
 		
 			out.println("<h1>Your Order Summary</h1>");
-			//PreparedStatement pstmt = con.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);			
-			//ResultSet keys = pstmt.getGeneratedKeys();
-			//keys.next();
-			//int orderId = keys.getInt(1);
-			
+			//Statement stmt2 = conn.createStatement();
+			PreparedStatement pstmt = conn.prepareStatement(sql2, stmt.RETURN_GENERATED_KEYS);			
+			ResultSet keys = pstmt.getGeneratedKeys();
+			keys.next();
+			int orderId = keys.getInt(1);
+			String sql3 = "SELECT productId, quantity, price FROM orderProduct WHERE orderId = "+orderId+"";
+			ResultSet rs2 = stmt.executeQuery(sql3);
+			out.println("<tr style='color: maroon;'><td colspan='5'><table border='1' ><th>Product Id</th><th>Quantity</th><th>Price</th>");
+			while (rs2.next()){
+				out.println("<tr style='color: maroon;'><td>"+rs2.getInt(1)+"</td><td>"+rs2.getInt(2)+"</td><td>"+"$" + rs2.getDouble(3)+"</td></tr>");
+			}
 			
 		conn.close();
 }catch(Exception e){
