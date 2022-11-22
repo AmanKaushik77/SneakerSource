@@ -63,7 +63,7 @@ Statement stmt = conn.createStatement();){
 	}
 
 }catch(Exception e){
-	out.println(e);
+	//out.println(e);
 }
 // Print out the ResultSet
 
