@@ -9,7 +9,7 @@
 <head>
 <title>Your Shopping Cart</title>
 </head>
-<body>
+<body style = 'background-color:beige'>
 
 <%
 // Get the current list of products

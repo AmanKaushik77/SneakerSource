@@ -6,7 +6,7 @@
 <head>
 <title>YOUR NAME Grocery Order List</title>
 </head>
-<body>
+<body style = 'background-color:beige;'>
 
 <h1>Order List!</h1>
 
@@ -37,16 +37,16 @@ String sql = "SELECT O.orderId, C.customerId, C.firstname, C.lastname, O.totalAm
 ResultSet rst = stmt.executeQuery(sql);
 String sql2 = "SELECT productId, quantity, price FROM orderProduct WHERE orderId = ?";
 PreparedStatement prep = conn.prepareStatement(sql2);
-out.println("<table border='1' style='background-color:beige;'><tr style='color: maroon;'><th>Order Id</th><th>Customer Id</th><th>Customer Name</th><th>Total Amount</th>");
+out.println("<table border='1' style='background-color: maroon;'><tr style='color: beige;'><th>Order Id</th><th>Customer Id</th><th>Customer Name</th><th>Total Amount</th>");
 
 while(rst.next()){
-	out.println("<tr style='color: maroon;'><td>"+rst.getInt(1)+"</td><td>"+rst.getInt(2)+"</td><td>"+rst.getString(3)+" "+rst.getString(4)+"</td><td>"+ "$" + rst.getDouble(5)+"</td></tr>");
+	out.println("<tr style='color: beige;'><td>"+rst.getInt(1)+"</td><td>"+rst.getInt(2)+"</td><td>"+rst.getString(3)+" "+rst.getString(4)+"</td><td>"+ "$" + rst.getDouble(5)+"</td></tr>");
 	
 	prep.setInt(1,rst.getInt(1));
 	ResultSet rst2 = prep.executeQuery();
-	out.println("<tr style='color: maroon;'><td colspan='5'><table border='1' ><th>Product Id</th><th>Quantity</th><th>Price</th>");
+	out.println("<tr style='color: beige;'><td colspan='5'><table border='1' ><th>Product Id</th><th>Quantity</th><th>Price</th>");
 	while(rst2.next()){
-		out.println("<tr style='color: maroon;'><td>"+rst2.getInt(1)+"</td><td>"+rst2.getInt(2)+"</td><td>"+"$" + rst2.getDouble(3)+"</td></tr>");
+		out.println("<tr style='color: beige;'><td>"+rst2.getInt(1)+"</td><td>"+rst2.getInt(2)+"</td><td>"+"$" + rst2.getDouble(3)+"</td></tr>");
 	}
 	out.println("</table>");
 }
