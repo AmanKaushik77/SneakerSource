@@ -20,12 +20,13 @@ String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustS
 String user = "SA";
 String pw = "304#sa#pw";
 String pId = request.getParameter("id");
+int productId = Integer.parseInt(pId);
 try(Connection conn = DriverManager.getConnection(url,user,pw);
     Statement stmt = conn.createStatement();){
     String sql = "SELECT productId, productName, productPrice, productImageURL, productImage FROM product WHERE productId LIKE ?";
     
     PreparedStatement prep = conn.prepareStatement(sql);
-    prep.setInt(1, Integer.parseInt(pId));
+    prep.setInt(1, productId);
 
     ResultSet rs = prep.executeQuery();
     if(rs.next()){

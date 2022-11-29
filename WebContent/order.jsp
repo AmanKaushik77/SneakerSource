@@ -11,7 +11,7 @@
 <head>
 <title>AK Grocery Order Processing</title>
 </head>
-<body>
+<body style = 'background-color:beige'>
         
 <%@ include file="header.jsp" %>
 
@@ -46,7 +46,9 @@ try
         
 		// Get database connection
         getConnection();
-	                		
+		String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
+		String user = "SA";
+		String pw = "304#sa#pw";
         String sql = "SELECT customerId, firstName+' '+lastName, password FROM customer WHERE customerId = ?";	
 				      
    		con = DriverManager.getConnection(url, uid, pw);

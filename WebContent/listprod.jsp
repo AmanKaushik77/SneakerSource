@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Ray's Grocery</title>
+<title>AK Grocery</title>
 </head>
 <body style='background-color: beige;'>
 

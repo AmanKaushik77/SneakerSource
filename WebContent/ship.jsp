@@ -18,52 +18,59 @@
 <%
 	// TODO: Get order id
 	String orderId = request.getParameter("orderId");
-	int ordId = Integer.parseInt(orderId);
-	String sql = "SELECT year(orderDate), month(orderDate), day(orderDate), SUM(totalAmount) FROM OrderSummary GROUP BY year(orderDate), month(orderDate), day(orderDate)";
+	
 	String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
 	String user = "SA";
 	String pw = "304#sa#pw";
-	String sql = "SELECT orderId, productId, quantity, price FROM orderProduct WHERE orderId = ?"
+	String sql = "SELECT orderId, productId, quantity, price FROM orderproduct WHERE orderId = ?";	
+	boolean check = true;
 	try(Connection conn = DriverManager.getConnection(url,user,pw);
     	Statement stmt = conn.createStatement();){
-          
+		conn.setAutoCommit(false);
 	// TODO: Check if valid order id
-		if(ordId == null){
+		if(orderId == null || orderId.equals("")){
 			out.println("<h2> Invalid order Id. Please try again.</h2>");
 		}else{
 			PreparedStatement prep = conn.prepareStatement(sql);
+			int ordId = Integer.parseInt(orderId);
 			prep.setInt(1,ordId);
 			ResultSet rs = prep.executeQuery();
 			if(rs.next()){ 
-				conn.setAutoCommit(false);
+				
 
-				String sql2 = "INSERT INTO shipments (shipmentDate, warehouseId) VALUES (?,1)";
+				String sql2 = "INSERT INTO shipment (shipmentDate, warehouseId) VALUES (?,1)";
 				String sql3 = "SELECT quantity FROM productInventory WHERE warehouseId = 1 AND productId = ?";
 				prep = conn.prepareStatement(sql2);
 				prep.setTimestamp(1, new java.sql.Timestamp(new Date().getTime()));
 				prep.executeUpdate();
 
-				boolean check = true;
+				
 				PreparedStatement prep2 = conn.prepareStatement(sql3);
+				prep2.setInt(1, rs.getInt(2));
 				ResultSet rs2 = prep2.executeQuery();
+				int pId = rs.getInt(2);
+				int inv = rs2.getInt(1);
+				int quan = rs.getInt(3);
 				while(rs2.next()) {
-					if (!rs2.next() || rs2.getInt(1) < rs.getInt(3)) {
+					if (!rs2.next() || inv < quan) {
 						check = false;
-						out.println("<h1>Shipment cannot be complete :(. Insufficient inventory for product id: "+prodId+"</h1>");
-						conn.setAutoCommit(true);
+						out.println("<h1>Shipment cannot be complete :(. Insufficient inventory for product id: "+rs.getInt(1)+"</h1>");
 						break;
 					}
-				out.println("<h2>Ordered product: "+prodId+" Qty: "+rs.getInt(3)+" Previous inventory: "+rs2.getInt(1)+" New inventory: "+(rs.getInt(3) - rs2.getInt(1))+"</h2><br>");
-				prep.setInt(1, rs.getInt(3) - rs2.getInt(1));
-				prep.setInt(2, rs.getInt(2));
+				prep.setInt(1, inv - quan);
+				prep.setInt(2, pId);
+				out.println("<h2>Ordered product: "+pId+" Qty: "+quan+" Previous inventory: "+inv+" New inventory: "+(inv - quan)+"</h2><br>");
+				
+				conn.close();
 				}
 			}
 		}
-		if(!check){
+		if(check == false) {
 			conn.rollback();
 		}else{
 			out.println("<h1>Shipment successfully processed.</h1>");
    			conn.commit();   
+			conn.setAutoCommit(true);
 		}
 	}catch(Exception e){
 		out.println(e);
