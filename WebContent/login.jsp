@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="styles.css">
 <title>Login Screen</title>
+<h1 align="center" style = 'color:#FFC000'>Please login to your Sneaker Source Account!</h1>
 </head>
-<body style = 'background-color:beige;'>
+<body >
+	<ul >
+        <li ><a href="login.jsp">Login</a></li>
 
+        <li ><a href="listprod.jsp">Begin Shopping</a></li>
+
+        <li ><a href="listorder.jsp">List All Orders</a></li>
+
+        <li ><a href="customer.jsp">Customer Info</a></li>
+
+        <li ><a href="admin.jsp">Administrators</a></li>
+
+        <li ><a href="logout.jsp">Log out</a></li>
+</ul>
 <div style="margin:0 auto;text-align:center;display:inline">
 
 <h3>Please Login to System</h3>

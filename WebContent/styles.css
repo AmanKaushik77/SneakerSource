@@ -1,0 +1,29 @@
+body{
+   background-color:#232323;
+   font-family: Monospace;
+   color: white;
+
+ 
+}
+
+ul{
+    text-align: right;
+    background-color:#FFC000;
+    
+}
+li {
+    float: left;
+    list-style-type: none;
+    margin-left: auto;
+  }
+  
+  a {
+    display: block;
+    padding: 8px;
+    background-color:#581845 ;
+    text-decoration: none;
+    color:black;
+    margin-right: 9em;
+    color:white;
+
+  }

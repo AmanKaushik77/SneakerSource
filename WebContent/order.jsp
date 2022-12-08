@@ -11,7 +11,7 @@
 <head>
 <title>AK Grocery Order Processing</title>
 </head>
-<body style = 'background-color:beige'>
+<body >
         
 <%@ include file="header.jsp" %>
 

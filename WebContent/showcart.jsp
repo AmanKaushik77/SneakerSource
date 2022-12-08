@@ -7,15 +7,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="styles.css">
 <title>Your Shopping Cart</title>
 </head>
-<body style = 'background-color:beige'>
-
+<body >
+	<h1 align="center" style = 'color:#FFC000'>Welcome to Sneaker Source</h1>
+	<h3 align="center" style = 'color:white'>Your one stop shop for Sneakers!</h3>
+	
+	<ul >
+			<li ><a href="login.jsp">Login</a></li>
+	
+			<li ><a href="listprod.jsp">Begin Shopping</a></li>
+	
+			<li ><a href="listorder.jsp">List All Orders</a></li>
+	
+			<li ><a href="customer.jsp">Customer Info</a></li>
+	
+			<li ><a href="admin.jsp">Administrators</a></li>
+	
+			<li ><a href="logout.jsp">Log out</a></li>
+	</ul>
 <%
 // Get the current list of products
 @SuppressWarnings({"unchecked"})
 HashMap<String, ArrayList<Object>> productList = (HashMap<String, ArrayList<Object>>) session.getAttribute("productList");
-
+	String id = request.getParameter("delete");
 if (productList == null)
 {	out.println("<H1>Your shopping cart is empty!</H1>");
 	productList = new HashMap<String, ArrayList<Object>>();
@@ -24,7 +40,7 @@ else
 {
 	NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
-	out.println("<h1>Your Shopping Cart</h1>");
+	out.println("<h1><br>Your Shopping Cart</h1>");
 	out.print("<table><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th>");
 	out.println("<th>Price</th><th>Subtotal</th></tr>");
 
@@ -66,7 +82,8 @@ else
 		}		
 
 		out.print("<td align=\"right\">"+currFormat.format(pr)+"</td>");
-		out.print("<td align=\"right\">"+currFormat.format(pr*qty)+"</td></tr>");
+		out.print("<td align=\"right\">"+currFormat.format(pr*qty)+"</td> ");
+		out.println("<td>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"showcart.jsp?delete=" +product.get(0)+"\">Remove Item from Cart</a></td> </tr>");
 		out.println("</tr>");
 		total = total +pr*qty;
 	}

@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-        <title>AK Grocery Main Page</title>
+<head style = 'background-color:black; '>
+        <link rel="stylesheet" href="styles.css">
+        <title>Sneaker Source Main Page</title>
 </head>
-<body style = 'background-color:beige;' >
-<h1 align="center">Welcome to AK Grocery</h1>
+<body >
+<h1 align="center" style = 'color:#FFC000'>Welcome to Sneaker Source</h1>
+<h3 align="center" style = 'color:white'>Your one stop shop for Sneakers!</h3>
 
-<h2 align="center"><a href="login.jsp">Login</a></h2>
+<ul >
+        <li ><a href="login.jsp">Login</a></li>
 
-<h2 align="center"><a href="listprod.jsp">Begin Shopping</a></h2>
+        <li ><a href="listprod.jsp">Begin Shopping</a></li>
 
-<h2 align="center"><a href="listorder.jsp">List All Orders</a></h2>
+        <li ><a href="listorder.jsp">List All Orders</a></li>
 
-<h2 align="center"><a href="customer.jsp">Customer Info</a></h2>
+        <li ><a href="customer.jsp">Customer Info</a></li>
 
-<h2 align="center"><a href="admin.jsp">Administrators</a></h2>
+        <li ><a href="admin.jsp">Administrators</a></li>
 
-<h2 align="center"><a href="logout.jsp">Log out</a></h2>
-
+        <li ><a href="logout.jsp">Log out</a></li>
+</ul>
 <%
 // TODO: Display user name that is logged in (or nothing if not logged in)	
         String user = (String) session.getAttribute("authenticatedUser");
         if(user == null){
-                out.println("<h1> User not signed in yet </h1>");
+                out.println("<p> User not signed in yet </p>");
         }else{
-                out.println("<h1> Welcome: " + user + "</h1>");
+                out.println("<p> Welcome: " + user + "</p>");
         }
 %>
+
+<img src="sneakerSourceLogo.png" alt="Sneaker Source Logo" style="width:750px;height:550px; padding-left: 9cm;">
+
 </body>
 </head>
 
