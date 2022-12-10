@@ -1,9 +1,10 @@
 <html>
 <head>
-<title>Ray's Grocery</title>
+<title>Sneaker Source Checkout</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-<body style = 'background-color:beige'>
-
+<body >
+    <%@ include file="header.jsp" %>
 <h1>Enter your customer id and password to complete the transaction:</h1>
 
 <form method="get" action="order.jsp">

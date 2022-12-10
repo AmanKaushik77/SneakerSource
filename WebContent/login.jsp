@@ -3,24 +3,13 @@
 <head>
 <link rel="stylesheet" href="styles.css">
 <title>Login Screen</title>
-<h1 align="center" style = 'color:#FFC000'>Please login to your Sneaker Source Account!</h1>
+<%@ include file="header.jsp" %>
 </head>
 <body >
-	<ul >
-        <li ><a href="login.jsp">Login</a></li>
-
-        <li ><a href="listprod.jsp">Begin Shopping</a></li>
-
-        <li ><a href="listorder.jsp">List All Orders</a></li>
-
-        <li ><a href="customer.jsp">Customer Info</a></li>
-
-        <li ><a href="admin.jsp">Administrators</a></li>
-
-        <li ><a href="logout.jsp">Log out</a></li>
-</ul>
+        <br>
+<h1 align="center" style = 'color:#FFC000'>Please login to your Sneaker Source Account!</h1>
 <div style="margin:0 auto;text-align:center;display:inline">
-
+<br>
 <h3>Please Login to System</h3>
 
 <%
@@ -29,7 +18,7 @@ if (session.getAttribute("loginMessage") != null)
 	out.println("<p>"+session.getAttribute("loginMessage").toString()+"</p>");
 %>
 
-<br>
+
 <form name="MyForm" method=post action="validateLogin.jsp">
 <table style="display:inline">
 <tr>
@@ -45,7 +34,10 @@ if (session.getAttribute("loginMessage") != null)
 <input class="submit" type="submit" name="Submit2" value="Log In">
 </form>
 
+
 </div>
+<li ><a style = 'background-color: #FFC000; color:black;' href='newCust.jsp' >Sign Up!</a></li>
+<li ><a style = 'background-color: #FFC000; color:black;' href='forgotPass.jsp' >Forgot Password?</a></li>
 
 </body>
 </html>

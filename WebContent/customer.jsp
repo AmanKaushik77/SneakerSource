@@ -21,10 +21,10 @@
 // TODO: Print Customer information
 String sql = "SELECT * FROM customer WHERE userId = ?";
 String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
-	String user = "SA";
+	String userN = "SA";
 	String pw = "304#sa#pw";
 	
-	try(Connection conn = DriverManager.getConnection(url,user,pw);
+	try(Connection conn = DriverManager.getConnection(url,userN,pw);
     	Statement stmt = conn.createStatement();){	
 		PreparedStatement prep = conn.prepareStatement(sql);
 		prep.setString(1, userName);	
@@ -45,8 +45,9 @@ String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustS
 		out.println("<tr ><th>User id</th><td>"+rst.getString(11)+"</td></tr>");		
 		out.println("</table>");
 	}
-	out.println("<li ><a style = 'background-color: #FFC000; color:black;' href='changeUserId.jsp' >Change userID</a></h4>");
-	out.println("<li><a style = 'background-color: #FFC000; color:black;' href='changepass.jsp' >Change password</a></h4>");
+	out.println("<li ><a style = 'background-color: #FFC000; color:black;' href='changeUserId.jsp' >Change userID</a></li>");
+	out.println("<li><a style = 'background-color: #FFC000; color:black;' href='changePassword.jsp' >Change password</a></li>");
+	out.println("<li><a style = 'background-color: #FFC000; color:black;' href= 'changePinfo.jsp'> Change personal info</a></h2>");
 	out.println("<li><a style = 'background-color: #FFC000; color:black;' href= 'listCustOrders.jsp'> Show my orders!</a></h2>");
 	conn.close();
 	}catch (SQLException e){

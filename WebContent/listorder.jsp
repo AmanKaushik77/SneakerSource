@@ -30,9 +30,9 @@ catch (java.lang.ClassNotFoundException e)
 
 // Make connection
 String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
-String user = "SA";
+String userN = "SA";
 String pw = "304#sa#pw";
-try(Connection conn = DriverManager.getConnection(url,user,pw);
+try(Connection conn = DriverManager.getConnection(url,userN,pw);
 Statement stmt = conn.createStatement();){
 
 String sql = "SELECT O.orderId, C.customerId, C.firstname, C.lastname, O.totalAmount FROM orderSummary O JOIN customer C ON O.customerId = C.customerId";

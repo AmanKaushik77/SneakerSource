@@ -10,6 +10,17 @@
 
     <li ><a href="admin.jsp">Administrators</a></li>
 
+    <li ><a href="showcart.jsp">My Cart!</a></li>
+
     <li ><a href="logout.jsp">Log out</a></li>
 </ul>
+<%
+// TODO: Display user name that is logged in (or nothing if not logged in)	
+        String user = (String) session.getAttribute("authenticatedUser");
+        if(user == null){
+                out.println("<p> User not signed in yet </p>");
+        }else{
+                out.println("<p> Welcome: " + user + "</p>");
+        }
+%>
 <hr>

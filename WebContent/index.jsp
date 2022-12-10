@@ -19,6 +19,8 @@
 
         <li ><a href="admin.jsp">Administrators</a></li>
 
+        <li ><a href="showcart.jsp">My Cart!</a></li>
+
         <li ><a href="logout.jsp">Log out</a></li>
 </ul>
 <%

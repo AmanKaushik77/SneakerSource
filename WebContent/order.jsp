@@ -9,7 +9,8 @@
 
 <html>
 <head>
-<title>AK Grocery Order Processing</title>
+<title>Sneaker Source Order Processing</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body >
         
@@ -47,7 +48,7 @@ try
 		// Get database connection
         getConnection();
 		String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";
-		String user = "SA";
+		String uid = "SA";
 		String pw = "304#sa#pw";
         String sql = "SELECT customerId, firstName+' '+lastName, password FROM customer WHERE customerId = ?";	
 				      

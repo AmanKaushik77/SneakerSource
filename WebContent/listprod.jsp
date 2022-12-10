@@ -35,14 +35,14 @@ catch (SQLException ex)
 */
 %>
 
-  <option>Beverages</option>
-  <option>Condiments</option>
-  <option>Confections</option>
-  <option>Dairy Products</option>
-  <option>Grains/Cereals</option>
-  <option>Meat/Poultry</option>
-  <option>Produce</option>
-  <option>Seafood</option>       
+  <option>Nike</option>
+  <option>Off-White</option>
+  <option>Adidas</option>
+  <option>Gucci</option>
+  <option>Payless</option>
+  <option>Vans</option>
+  <option>Dior</option>
+  <option>Prada</option>       
   </select>
   <input type="text" name="productName" size="50">
   <input type="submit" value="Submit"><input type="reset" value="Reset"></p>
@@ -51,14 +51,14 @@ catch (SQLException ex)
 <%
 // Colors for different item categories
 HashMap<String,String> colors = new HashMap<String,String>();		// This may be done dynamically as well, a little tricky...
-colors.put("Beverages", "#0000FF");
-colors.put("Condiments", "#FF0000");
-colors.put("Confections", "#000000");
-colors.put("Dairy Products", "#6600CC");
-colors.put("Grains/Cereals", "#55A5B3");
-colors.put("Meat/Poultry", "#FF9900");
-colors.put("Produce", "#00CC00");
-colors.put("Seafood", "#FF66CC");
+colors.put("Nike", "#0000FF");
+colors.put("Off-White", "#FF0000");
+colors.put("Adidas", "#000000");
+colors.put("Gucci", "#6600CC");
+colors.put("Payless", "#55A5B3");
+colors.put("Vans", "#FF9900");
+colors.put("Dior", "#00CC00");
+colors.put("Prada", "#FF66CC");
 %>
 
 <%
@@ -74,23 +74,23 @@ if (hasNameParam && hasCategoryParam)
 {
 	filter = "<h3>Products containing '"+name+"' in category: '"+category+"'</h3>";
 	name = '%'+name+'%';
-	sql = "SELECT productId, productName, productPrice,  categoryName FROM Product P JOIN Category C ON P.categoryId = C.categoryId WHERE productName LIKE ? AND categoryName = ?";
+	sql = "SELECT productId, productName, productPrice,  categoryName, productImageURL FROM Product P JOIN Category C ON P.categoryId = C.categoryId WHERE productName LIKE ? AND categoryName = ?";
 }
 else if (hasNameParam)
 {
 	filter = "<h3>Products containing '"+name+"'</h3>";
 	name = '%'+name+'%';
-	sql = "SELECT productId, productName, productPrice, categoryName FROM Product P JOIN Category C ON P.categoryId = C.categoryId WHERE productName LIKE ?";
+	sql = "SELECT productId, productName, productPrice, categoryName, productImageURL FROM Product P JOIN Category C ON P.categoryId = C.categoryId WHERE productName LIKE ?";
 }
 else if (hasCategoryParam)
 {
 	filter = "<h3>Products in category: '"+category+"'</h3>";
-	sql = "SELECT productId, productName, productPrice, categoryName FROM Product P JOIN Category C ON P.categoryId = C.categoryId WHERE categoryName = ?";
+	sql = "SELECT productId, productName, productPrice, categoryName, productImageURL FROM Product P JOIN Category C ON P.categoryId = C.categoryId WHERE categoryName = ?";
 }
 else
 {
 	filter = "<h3>All Products</h3>";
-	sql = "SELECT productId, productName, productPrice, categoryName FROM Product P JOIN Category C ON P.categoryId = C.categoryId";
+	sql = "SELECT productId, productName, productPrice, categoryName, productImageURL FROM Product P JOIN Category C ON P.categoryId = C.categoryId";
 }
 
 out.println(filter);
@@ -132,7 +132,7 @@ try
 		if (color == null)
 			color = "#FFFFFF";
 
-		out.println("<td><img src=img/"+rst.getInt(1)+".jpg><a href=\"product.jsp?id="+id+"\"<font color=\"" + color + "\">" + rst.getString(2) + "</font></td>"
+		out.println("<td><img src="+rst.getString(5)+"><a href=\"product.jsp?id="+id+"\"<font color=\"" + color + "\">" + rst.getString(2) + "</font></td>"
 				+ "<td><font color=\"" + color + "\">" + itemCategory + "</font></td>"
 				+ "<td><font color=\"" + color + "\">" + currFormat.format(rst.getDouble(3))
 				+ "</font></td></tr>");
